@@ -4,12 +4,6 @@ Repository Analyser – a React + TypeScript + Vite app that analyses public Git
 
 **Live demo:** [https://cubic-coding-challenge.vercel.app/](https://cubic-coding-challenge.vercel.app/)
 
-## Demo
-
-<video src="assets/demo.mov" controls width="100%">
-  Your browser does not support the video tag. [Watch the demo video](assets/demo.mov) instead.
-</video>
-
 ## Getting Started
 
 1. Install dependencies: `yarn` or `npm install`

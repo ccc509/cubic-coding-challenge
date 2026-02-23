@@ -44,6 +44,7 @@ export function Home() {
         <Typography variant="h3">Repository Analyser</Typography>
         <TextField
           label="GitHub Repository URL"
+          disabled={isLoading}
           variant="outlined"
           placeholder="https://github.com/username/repo"
           value={repoUrl}
