@@ -43,7 +43,7 @@ export function LeftPanel() {
           }
         </Box>
         {
-          data && <History searchHistory={data} />
+          data && !!data.length && <History searchHistory={data} />
         }
       </Box>
     </Drawer>

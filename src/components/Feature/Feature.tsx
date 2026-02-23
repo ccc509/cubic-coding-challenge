@@ -1,5 +1,5 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Link, Typography } from "@mui/material";
 import type { Feature } from '../../utils/types';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 export function Feature({ feature }: Props) {
 
-  const { name, description } = feature;
+  const { name, description, entryPoints } = feature;
 
   return (<Accordion>
     <AccordionSummary
@@ -19,7 +19,17 @@ export function Feature({ feature }: Props) {
       <Typography component="span">{name}</Typography>
     </AccordionSummary>
     <AccordionDetails>
-      {description}
+      <Typography variant='body1'>{description}</Typography>
+      {
+        entryPoints.map(({ name, link }) => (
+          <Box key={name} sx={{ paddingTop: 2 }}>
+            <Typography variant='h6'>{name}</Typography>
+            <Link href={link} underline="none">
+              {link}
+            </Link>
+          </Box>
+        ))
+      }
     </AccordionDetails>
   </Accordion>)
 }

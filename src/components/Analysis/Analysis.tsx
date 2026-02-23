@@ -23,11 +23,12 @@ export function Analysis({ resultId }: Props) {
         isLoading && <CircularProgress />
       }
       {
-        data && <Box>
-          <Typography variant="h5">{data.title}</Typography>
+        data && <Box sx={{ width: '80%', paddingLeft: '200px', display: 'flex', gap: 2, flexDirection: 'column', paddingBottom: 2 }}>
+          <Typography variant="h3">{data.title}</Typography>
+          <Typography variant="h4">{data.description}</Typography>
           {
             data.features.map((feature) => {
-              return <Feature feature={feature} />
+              return <Feature key={feature.name} feature={feature} />
             })
           }
         </Box>}
