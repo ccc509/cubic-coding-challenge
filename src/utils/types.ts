@@ -18,9 +18,3 @@ export type RepoMetadata = {
   title: string;
   description: string;
 };
-
-export type UseRepoAnalysisState = {
-  loading: boolean;
-  error: string | null;
-  analysis: Analysis | null;
-};

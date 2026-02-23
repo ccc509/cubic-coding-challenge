@@ -8,7 +8,7 @@ type Props = {
 
 export function Feature({ feature }: Props) {
 
-  const { name, description, entryPoints } = feature;
+  const { name, description, entryPoints = [] } = feature;
 
   return (<Accordion>
     <AccordionSummary
@@ -21,9 +21,9 @@ export function Feature({ feature }: Props) {
     <AccordionDetails>
       <Typography variant='body1'>{description}</Typography>
       {
-        entryPoints.map(({ name, link }) => (
-          <Box key={name} sx={{ paddingTop: 2 }}>
-            <Typography variant='h6'>{name}</Typography>
+        entryPoints.map(({ name: entryName, link }, index) => (
+          <Box key={`${entryName}-${index}`} sx={{ paddingTop: 2 }}>
+            <Typography variant='h6'>{entryName}</Typography>
             <Link href={link} underline="none">
               {link}
             </Link>

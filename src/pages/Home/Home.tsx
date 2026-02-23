@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { LeftPanel } from '../../components/LeftPanel';
 import { palette } from '../../cubicTheme';
 import { analyseRepo, getRepoMetadata } from '../../services/DefaultService';
+import { isValidGithubUrl } from '../../utils/githubUrl';
 import { URLS } from '../../utils/urls';
 
 export function Home() {
@@ -14,14 +15,9 @@ export function Home() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  const isValidGithubUrl = useMemo(() => {
-    const githubRegex = /^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9-]+\/[a-zA-Z0-9._-]+\/?$/;
-    const cleanUrl = repoUrl.replace(/\.git$/, '');
-
-    return githubRegex.test(cleanUrl);
-  }, [repoUrl]);
+  const isValidUrl = useMemo(() => isValidGithubUrl(repoUrl), [repoUrl]);
 
   const handleAnalyse = async () => {
     setIsLoading(true);
@@ -52,9 +48,9 @@ export function Home() {
           placeholder="https://github.com/username/repo"
           value={repoUrl}
           onChange={(e) => setRepoUrl(e.target.value)}
-          error={repoUrl.length > 0 && !isValidGithubUrl}
+          error={repoUrl.length > 0 && !isValidUrl}
           helperText={
-            repoUrl.length > 0 && !isValidGithubUrl
+            repoUrl.length > 0 && !isValidUrl
               ? "Please enter a valid GitHub repository link"
               : ""
           }
@@ -62,19 +58,19 @@ export function Home() {
         />
         <Box>
           <Button
-            loading={isLoading}
             variant="contained"
             color="primary"
-            disabled={!isValidGithubUrl || isLoading}
+            disabled={!isValidUrl || isLoading}
             onClick={handleAnalyse}
             size="large"
+            startIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : null}
           >
-            Analyse
+            {isLoading ? 'Analysing...' : 'Analyse'}
           </Button>
         </Box>
       </Box>
       {
-        errorMessage && <Box sx={{ marginTop: 4, background: 'white', width: '500px' }}>
+        errorMessage && <Box sx={{ marginTop: 4, background: 'white', width: '70%', marginLeft: '200px' }}>
           <Typography color={palette.red} variant='h6'>{errorMessage}</Typography>
         </Box>
       }

@@ -4,9 +4,9 @@ import './App.css';
 import { mainTheme } from './cubicTheme';
 import { CubicRoutes } from './Routes';
 
-function App() {
-  const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
+function App() {
   return (
     <ThemeProvider theme={mainTheme}>
       <QueryClientProvider client={queryClient}>

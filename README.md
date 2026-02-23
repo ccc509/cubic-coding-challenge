@@ -1,3 +1,21 @@
+# Cubic Coding Challenge
+
+Repository Analyser – a React + TypeScript + Vite app that analyses public GitHub repositories using OpenAI.
+
+## Getting Started
+
+1. Install dependencies: `yarn` or `npm install`
+2. Create a `.env` file with `VITE_OPENAI_API_KEY=your-openai-api-key`
+3. Run the dev server: `yarn dev` or `npm run dev`
+
+## Future Improvements (Nice to Have)
+
+- **React Error Boundary** – Add an error boundary to catch rendering errors and display a fallback UI instead of a white screen
+- **Retry logic for API calls** – Configure React Query's `retry` option for transient failures (e.g. `retry: 3`)
+- **Defensive JSON parsing** – The `getRepoMetadata` GitHub response already uses try/catch around `response.json()`; consider similar handling for other external API responses
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
